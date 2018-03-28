@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status，log4j自己的日志输出信息 -->
+<configuration status="OFF">
+	<!-- 全局变量 -->
+	<Properties>
+		<Property name="basePath">logs/</Property>
+		<!-- 显示输出信息的具体：级别，类，方法，代码行 -->
+		<Property name="pattern">%msg%n</Property>
+	</Properties>
+<!-- %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %C.%M(%L) - %msg%n -->
+	<!-- 日志输出目的地 -->
+	<appenders>
+		<!-- 控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}" />
+		</Console>
+
+
+		<!-- 文件输出，自动在应用根目录创建目录及文件 -->
+		<!-- fileName，当前日志文件名称；filePattern，旧日志文件命名模式 -->
+		<!-- <RollingFile name="warnfile"
+			fileName="${basePath}/app-info.log" filePattern="${basePath}/app-info-%d{yyyy-MM-dd}-%i.log">
+			过滤器
+			<ThresholdFilter level="warn" />
+			样式
+			<PatternLayout pattern="${pattern}" />
+			文件分割策略
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile> -->
+	</appenders>
+
+	<!-- 可以为不同包路径设置不同的日志级别 -->
+	<loggers>
+		<!-- 自定义logger，additivity属性，信息是否在向后传递 -->
+		<logger name="com" level="debug">
+		</logger>
+		<!-- 通用输出设置 -->
+		<root level="warn">
+			<AppenderRef ref="Console" />
+			<!-- <AppenderRef ref="warnfile" /> -->
+		</root>
+	</loggers>
+</configuration>
